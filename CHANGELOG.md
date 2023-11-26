@@ -1,6 +1,6 @@
 # ShallowChessAI Development Changelog
 
-### 2023/11/26
+### Update 2023/11/26
 
 Enhancements:
 

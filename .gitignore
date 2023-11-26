@@ -1,4 +1,5 @@
-dataset/
+dataset/*
+!dataset/training_dataset_490k.zip
 stockfish/
 webgui/
 TODO.txt
