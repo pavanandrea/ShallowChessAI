@@ -13,5 +13,5 @@ Enhancements:
 Bug fixes:
 
 * Now the model has no difficulties in making a checkmate.
-* Fixed promotion bug.
+* Fixed promotion bug in the pseudolegal move generator.
 * Miscellaneous small fixes in the minimax function.

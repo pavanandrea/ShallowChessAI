@@ -32,10 +32,17 @@ To play with ShallowChessAI, follow these steps:
 5. Open your terminal or command prompt from the root folder of ShallowChessAI.
 6. Run `julia run.jl`. Good luck!
 
+<p align="center">
+    <!--
+    ![ShallowChessAI](assets/screenshot-run-jl.jpg)
+    -->
+    <img height="256px" src="assets/screenshot-run-jl.jpg"/>
+</p>
+
 Training
 --------
 
-Training the MLP model from scratch is as simple as running a single terminal command. And it takes only a few minutes on an average desktop computer CPU, no GPU needed!
+Training the MLP model from scratch is as simple as running a single terminal command. It takes only a few minutes on an average desktop computer CPU; a GPU is not necessary.
 
 To train the MLP model on the included dataset, follow these steps:
 1. Download the file dataset/training_dataset_490k.zip from this repository and unzip it to dataset/training_dataset_490k.csv.
