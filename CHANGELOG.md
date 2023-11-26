@@ -13,4 +13,5 @@ Enhancements:
 Bug fixes:
 
 * Now the model has no difficulties in making a checkmate.
+* Fixed promotion bug.
 * Miscellaneous small fixes in the minimax function.

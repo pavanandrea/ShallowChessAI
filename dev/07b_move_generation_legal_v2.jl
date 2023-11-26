@@ -2,9 +2,6 @@
     This script generates the legal moves in a given position
     using the simplest technique pseudolegal+validation
 
-    (converted from Vector{Float32} to BitVector for efficiency:
-    on perft NPS increase from ∼130k to ∼800k)
-
     Author: Andrea Pavan
     Project: ShallowChessAI
     License: MIT
@@ -74,7 +71,13 @@ function pseudolegalmoves(currentbitboard,player=1)
                 childbitboard[776:783] .= 0;                    #clear en-passant flags
                 childbitboard[769] = 0;                         #set moving player
                 childbitboard[i] = 0;                           #move piece
-                childbitboard[i-8] = 1;
+                if 9<=i<=16
+                    #promotion to queen
+                    childbitboard[4*64+i-8] = 1;
+                else
+                    #simple one square forward
+                    childbitboard[i-8] = 1;
+                end
                 push!(childrenboards,childbitboard);
             end
             #capture on the right
@@ -568,7 +571,14 @@ function pseudolegalmoves(currentbitboard,player=1)
                 childbitboard[776:783] .= 0;                    #clear en-passant flags
                 childbitboard[769] = 1;                         #set moving player
                 childbitboard[6*64+i] = 0;                      #move piece
-                childbitboard[6*64+i+8] = 1;
+                if 49<=i<=56
+                    #promotion to queen
+                    childbitboard[10*64+i-8] = 1;
+                else
+                    #simple one square forward
+                    childbitboard[6*64+i-8] = 1;
+                end
+                #childbitboard[6*64+i+8] = 1;
                 push!(childrenboards,childbitboard);
             end
             #capture on the right

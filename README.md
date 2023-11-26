@@ -40,7 +40,7 @@ Training the MLP model from scratch is as simple as running a single terminal co
 To train the MLP model on the included dataset, follow these steps:
 1. Download the file dataset/training_dataset_490k.zip from this repository and unzip it to dataset/training_dataset_490k.csv.
 2. Open the Julia REPL in Package manager mode and run `add Flux JLD2` to add the required packages.
-3. Open your terminal or command prompt and run `julia train.jl -i dataset/training_dataset_490k.csv`.
+3. Open your terminal or command prompt and run `julia train.jl -i ./dataset/training_dataset_490k.csv`.
 
 To generate your own dataset and train the MLP model on it, follow these steps:
 1. Download and install Python+Pip for your operating system.
