@@ -18,19 +18,23 @@ Features
 - [x] Small and fast model of 24k params included. Trained on 483k boards on a single desktop CPU for a few minutes, it can play surprisingly well for its size
 - [x] Highly flexible heuristics that can be adapted to the available computing resources and/or to the desired speed
 - [ ] UCI protocol compatibility - TODO
-- [ ] Web GUI and online demo in C/C+ (WASM) - TODO
+- [ ] Web GUI and online demo in C/C++ (WASM) - TODO
 
 Getting started
 ---------------
 
 To play with ShallowChessAI, follow these steps:
-
+<!--
 1. Download and install Julia from the official [website](https://julialang.org/downloads/).
 2. Open Julia REPL by running `julia` in your terminal or command prompt.
 3. Press the `]` key to enter in Package manager mode.
 4. Run `add Flux JLD2` to add the required packages to your Julia environment.
 5. Open your terminal or command prompt from the root folder of ShallowChessAI.
-6. Run `julia run.jl`. Good luck!
+6. Run `julia run.jl`. Have fun!
+-->
+1. Download and install Julia from the official [website](https://julialang.org/downloads/).
+2. Open your terminal or command prompt from the root folder of ShallowChessAI.
+3. Run `julia run.jl`. Have fun!
 
 <p align="center">
     <!--

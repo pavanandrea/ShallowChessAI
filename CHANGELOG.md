@@ -1,5 +1,17 @@
 # ShallowChessAI Development Changelog
 
+### Update 2023/12/03
+
+Enhancements:
+
+* Changed models format from JLD2 to BIN, easier to read with other languages and slightly lighter on storage (-6% for the 24k model).
+* Zero-dependencies inference, to simplify the installation procedure.
+* Introduced efficient batch inference when maxdepth==1 (zero lookahead).
+
+Bug fixes:
+
+* Fixed promotion bug while capturing in the pseudolegal move generator.
+
 ### Update 2023/11/26
 
 Enhancements:

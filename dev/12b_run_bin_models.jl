@@ -1,13 +1,17 @@
 #======================================================================
     Play chess on a command line against a neural network
 
+    Modifications:
+    * no external dependecies
+    * efficient batch inference when maxdepth==1
+
     Author: Andrea Pavan
     Project: ShallowChessAI
     License: MIT
     Date: 03/12/2023
 ======================================================================#
-include("./dev/08b_bitboard_from_fen_v2.jl");
-include("./dev/09_minimax_search.jl");
+include("./08b_bitboard_from_fen_v2.jl");
+include("./09_minimax_search.jl");
 
 
 #import 24k model

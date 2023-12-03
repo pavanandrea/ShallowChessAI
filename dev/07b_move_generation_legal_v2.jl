@@ -88,7 +88,14 @@ function pseudolegalmoves(currentbitboard,player=1)
                 childbitboard[769] = 0;                         #set moving player
                 childbitboard[i] = 0;                           #move piece
                 emptysquare!(childbitboard,i-8+1);
-                childbitboard[i-8+1] = 1;
+                if 9<=i<=16
+                    #promotion to queen
+                    childbitboard[4*64+i-8+1] = 1;
+                else
+                    #simple capture
+                    childbitboard[i-8+1] = 1;
+                end
+                #childbitboard[i-8+1] = 1;
                 push!(childrenboards,childbitboard);
             end
             #capture on the left
@@ -99,7 +106,14 @@ function pseudolegalmoves(currentbitboard,player=1)
                 childbitboard[769] = 0;                         #set moving player
                 childbitboard[i] = 0;                           #move piece
                 emptysquare!(childbitboard,i-8-1);
-                childbitboard[i-8-1] = 1;
+                if 9<=i<=16
+                    #promotion to queen
+                    childbitboard[4*64+i-8-1] = 1;
+                else
+                    #simple capture
+                    childbitboard[i-8-1] = 1;
+                end
+                #childbitboard[i-8-1] = 1;
                 push!(childrenboards,childbitboard);
             end
         end
@@ -573,10 +587,10 @@ function pseudolegalmoves(currentbitboard,player=1)
                 childbitboard[6*64+i] = 0;                      #move piece
                 if 49<=i<=56
                     #promotion to queen
-                    childbitboard[10*64+i-8] = 1;
+                    childbitboard[10*64+i+8] = 1;
                 else
                     #simple one square forward
-                    childbitboard[6*64+i-8] = 1;
+                    childbitboard[6*64+i+8] = 1;
                 end
                 #childbitboard[6*64+i+8] = 1;
                 push!(childrenboards,childbitboard);
@@ -589,7 +603,14 @@ function pseudolegalmoves(currentbitboard,player=1)
                 childbitboard[769] = 1;                         #set moving player
                 childbitboard[6*64+i] = 0;                      #move piece
                 emptysquare!(childbitboard,i+8+1);
-                childbitboard[6*64+i+8+1] = 1;
+                if 49<=i<=56
+                    #promotion to queen
+                    childbitboard[10*64+i+8+1] = 1;
+                else
+                    #simple capture
+                    childbitboard[6*64+i+8+1] = 1;
+                end
+                #childbitboard[6*64+i+8+1] = 1;
                 push!(childrenboards,childbitboard);
             end
             #capture on the left
@@ -600,7 +621,14 @@ function pseudolegalmoves(currentbitboard,player=1)
                 childbitboard[769] = 1;                         #set moving player
                 childbitboard[6*64+i] = 0;                      #move piece
                 emptysquare!(childbitboard,i+8-1);
-                childbitboard[6*64+i+8-1] = 1;
+                if 49<=i<=56
+                    #promotion to queen
+                    childbitboard[10*64+i+8-1] = 1;
+                else
+                    #simple capture
+                    childbitboard[6*64+i+8-1] = 1;
+                end
+                #childbitboard[6*64+i+8-1] = 1;
                 push!(childrenboards,childbitboard);
             end
         end
