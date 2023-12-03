@@ -4,16 +4,87 @@
     Author: Andrea Pavan
     Project: ShallowChessAI
     License: MIT
-    Date: 29/10/2023
+    Date: 03/12/2023
 ======================================================================#
-using Flux;
-using JLD2;
 include("./dev/08b_bitboard_from_fen_v2.jl");
 include("./dev/09_minimax_search.jl");
 
 
-#initialization
-myneuralnet = JLD2.load(joinpath(@__DIR__,"./models/myneuralnet_24k.jld2"),"myneuralnet");
+#import 24k model
+#myneuralnet = JLD2.load(joinpath(@__DIR__,"../models/myneuralnet_24k.jld2"),"myneuralnet");
+W1 = Matrix{Float32}(undef,30,783);
+b1 = Vector{Float32}(undef,30);
+W2 = Matrix{Float32}(undef,30,30);
+b2 = Vector{Float32}(undef,30);
+W3 = Matrix{Float32}(undef,1,30);
+b3 = Vector{Float32}(undef,1);
+function import24kmodel(binfile)
+    arrayin = Vector{Float32}(undef,filesize(binfile)÷4);
+    read!(binfile,arrayin);
+    global W1 = reshape(arrayin[4:23493],30,783);
+    global b1 = arrayin[23494:23523];
+    global W2 = reshape(arrayin[23527:24426],30,30);
+    global b2 = arrayin[24427:24456];
+    global W3 = reshape(arrayin[24460:24489],1,30);
+    global b3 = [arrayin[24490]];
+end
+import24kmodel(joinpath(@__DIR__,"../models/myneuralnet_24k.bin"));
+function myneuralnet(xin)
+    a2 = tanh.(W1*xin.+b1);
+    a3 = tanh.(W2*a2.+b2);
+    return tanh.(W3*a3.+b3);
+end
+
+
+#batch-supporting score function
+function batchscore(bitboards)
+    N = size(bitboards,2);
+    scores = myneuralnet(convert(Matrix{Float32},bitboards));
+    for i=1:N
+        currentbitboard = bitboards[:,i];
+        if sum(currentbitboard[1:768])==2
+            #draw - only two kings on the board
+            scores[i] = 0;
+        end
+        if sum(currentbitboard[5*64+1:6*64])==0
+            #white lost the king
+            scores[i] = -1;
+        end
+        if sum(currentbitboard[11*64+1:12*64])==0
+            #black lost the king
+            scores[i] = 1;
+        end
+    end
+    return scores;
+end
+
+
+#zero-lookahead batch inference
+function batchinference(board,player)
+    #check if the board is a terminal state
+    if sum(board[5*64+1:6*64])==0 || sum(board[11*64+1:12*64])==0 || sum(board[1:768])==2       #if isgameover(board)
+        return ([0,0],board,score(board,true));
+    end
+
+    #find legal moves
+    (availablemoves,childboards) = legalmoves(board,player);        #vector containing the legal moves and each subsequent board
+    if length(availablemoves)==0
+        return ([0,0],board,score(board,true));
+    end
+
+    #evaluate legal moves
+    childscores = batchscore(childboards)[:];
+    bestchildidx = 1;
+    if player==1
+        bestchildidx = findfirst(childscores.==maximum(childscores));
+    else
+        bestchildidx = findfirst(childscores.==minimum(childscores));
+    end
+    return (availablemoves[bestchildidx], childboards[:,bestchildidx], childscores[bestchildidx]);
+end
+
+
+#display board on screen
 #pieces = ['P','N','B','R','Q','K','p','n','b','r','q','k'];
 pieces = ['♙','♘','♗','♖','♕','♔','🨾','♞','♝','♜','♛','♚'];
 squares = ["a8","b8","c8","d8","e8","f8","g8","h8",
@@ -24,9 +95,6 @@ squares = ["a8","b8","c8","d8","e8","f8","g8","h8",
             "a3","b3","c3","d3","e3","f3","g3","h3",
             "a2","b2","c2","d2","e2","f2","g2","h2",
             "a1","b1","c1","d1","e1","f1","g1","h1"];
-
-
-#display board on screen
 function printboard(currentbitboard)
     #write(stdin.buffer, 0x0C);
     #moving player
@@ -78,7 +146,8 @@ end
 function main()
     println("ShallowChessAI - Chess game on command line\n");
     gameboard = bitboardfromfen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-    maxdepth = 4;
+    #maxdepth = 4;
+    maxdepth = 1;
 
     #choose the starting player
     print("Choose the starting player (1=you, -1=computer): ");
@@ -87,7 +156,11 @@ function main()
     if startingplayer == -1
         println("The computer will be the white player");
         time1 = time();
-        (computermove,childboard,childmovescore) = minimax(gameboard,-startingplayer,maxdepth,-1,1);
+        if maxdepth>1
+            (computermove,childboard,childmovescore) = minimax(gameboard,-startingplayer,maxdepth,-1,1);
+        else
+            (computermove,childboard,childmovescore) = batchinference(gameboard,-startingplayer);
+        end
         println("Computer move: ",printsquare(computermove[1]),printsquare(computermove[2])," (score: ",childmovescore,", analyzed in ",round(time()-time1,digits=2)," s)");
         gameboard = childboard;
     else
@@ -125,7 +198,11 @@ function main()
             break;
         end
         time1 = time();
-        (computermove,childboard,childmovescore) = minimax(gameboard,-startingplayer,maxdepth,-1,1);
+        if maxdepth>1
+            (computermove,childboard,childmovescore) = minimax(gameboard,-startingplayer,maxdepth,-1,1);
+        else
+            (computermove,childboard,childmovescore) = batchinference(gameboard,-startingplayer);
+        end
         println("Computer move: ",printsquare(computermove[1]),printsquare(computermove[2])," (score: ",floor(Int,1500*childmovescore[1]^3),", analyzed in ",round(time()-time1,digits=2)," s)");
         gameboard = childboard;
         printboard(gameboard);
