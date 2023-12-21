@@ -5,12 +5,13 @@
 Enhancements:
 
 * Changed models format from JLD2 to BIN, easier to read with other languages and slightly lighter on storage (-6% for the 24k model).
-* Zero-dependencies inference, to simplify the installation procedure.
+* Zero-dependencies inference, to simplify the installation procedure. Not set as the default option because of significantly lower performance compared to Flux.
 * Introduced efficient batch inference when maxdepth==1 (zero lookahead).
+* Play against random opponent.
 
 Bug fixes:
 
-* Fixed promotion bug while capturing in the pseudolegal move generator.
+* Fixed promotion while capturing bug in the pseudolegal move generator.
 
 ### Update 2023/11/26
 

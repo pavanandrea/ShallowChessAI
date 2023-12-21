@@ -1,0 +1,9 @@
+[Event "Simple game"]
+[White "ShallowChessAI 24k v1 zero-lookahead"]
+[Black "Random legal move"]
+[Result "1-0"]
+[UTCDate "2023.12.06"]
+[UTCTime "15:22:04"]
+
+1. e4 Nf6 2. Nf3 b6 3. Nc3 Nxe4 4. Nxe4 d6 5. Nc3 Nd7 6. d3 b5 7. b3 d5 8. d4 f6 9. Nd2 e6 10. Bd3 Qe7 11. Rb1 a6 12. Rb2 c5 13. dxc5 Ra7 14. Nf1 Nb6 15. Bf4 h5 16. Bg3 Kd7 17. Qb1 Qd8 18. c6+ Kxc6 19. a4 Na8 20. Bc7 Bd7 21. Bf5 Qe7 22. g3 Rh7 23. Bxh7 f5 24. axb5+ Kxc7 25. bxa6 Qd6 26. Nxd5+ Kd8 27. Nfe3 Qc5 28. Ng2 Rc7 29. Nxc7 Qa5+ 30. c3 Qa2 31. Rxa2 Be7 32. Re2 Bc6 33. O-O Bd5 34. Nxd5 Bf6 35. Nc7 Ke7 36. Nxe6 Bd4 37. cxd4 Kf6 38. Ng5 Nc7 39. Qxf5#
+{On the positive side, the model learned to capture unprotected pieces and to mate the opponent king in 1. On the negative side, the quality of play is horrible, especially in the presence of a severe material imbalance. The engine makes too many useless moves and does not actively tries to improve its position. Possible solution: reinforcement learning with Stockfish as teacher}

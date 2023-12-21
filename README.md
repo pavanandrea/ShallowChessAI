@@ -36,7 +36,7 @@ To play with ShallowChessAI at zero lookahead, follow these steps:
     <img height="256px" src="assets/screenshot-run-jl.jpg"/>
 </p>
 
-To play chess in a normal setting, follow these steps:
+If instead you want to play chess in a normal setting, follow these steps:
 
 1. Download and install Julia from the official [website](https://julialang.org/downloads/).
 2. Open Julia REPL by running `julia` in your terminal or command prompt.
