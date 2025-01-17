@@ -1,10 +1,20 @@
 # ShallowChessAI Development Changelog
 
+### Update 2025/01/16
+
+Enhacements:
+
+* Refactored the whole algorithm from Julia to C.
+* Made a Web GUI and an online demo using WebAssembly.
+* Simplified folder structure of the codebase.
+* Support for promotion to knight/bishop/rook.
+
+
 ### Update 2023/12/03
 
 Enhancements:
 
-* Changed models format from JLD2 to BIN, easier to read with other languages and slightly lighter on storage (-6% for the 24k model).
+* Changed models format from JLD2 to BIN, easier to read from other languages.
 * Zero-dependencies inference, to simplify the installation procedure. Not set as the default option because of significantly lower performance compared to Flux.
 * Introduced efficient batch inference when maxdepth==1 (zero lookahead).
 * Play against random opponent.

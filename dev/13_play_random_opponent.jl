@@ -13,7 +13,7 @@ include("./09_minimax_search.jl");
 
 
 #initialization
-myneuralnet = JLD2.load(joinpath(@__DIR__,"../models/myneuralnet_24k.jld2"),"myneuralnet");
+myneuralnet = JLD2.load(joinpath(@__DIR__,"../train/pretrained-2311-24k.jld2"),"myneuralnet");
 squares = ["a8","b8","c8","d8","e8","f8","g8","h8",
             "a7","b7","c7","d7","e7","f7","g7","h7",
             "a6","b6","c6","d6","e6","f6","g6","h6",

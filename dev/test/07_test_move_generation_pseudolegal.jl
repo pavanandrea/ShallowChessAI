@@ -6,15 +6,15 @@
     License: MIT
     Date: 21/10/2023
 ======================================================================#
-include("../dev/07_move_generation_pseudolegal.jl");
-include("../dev/08b_bitboard_from_fen_v2.jl");
+include("../07_move_generation_pseudolegal.jl");
+include("../08b_bitboard_from_fen_v2.jl");
 
 
 println("Testing the pseudolegal move generation (debugging tests):");
 
 
 #white pawns
-fenstring = "8/8/8/5pP1/8/6n1/PP5P/8 w - f5 0 1";
+fenstring = "8/8/8/5pP1/8/6n1/PP5P/8 w - f6 0 1";
 currentbitboard = bitboardfromfen(fenstring);
 print(fenstring,"\t");
 moves = pseudolegalmoves(currentbitboard,1);
@@ -66,7 +66,7 @@ end
 
 
 #black pawns
-fenstring = "8/1p6/7p/6N1/pP6/8/8/8 b - b4 0 1";
+fenstring = "8/1p6/7p/6N1/pP6/8/8/8 b - b3 0 1";
 currentbitboard = bitboardfromfen(fenstring);
 print(fenstring,"\t");
 moves = pseudolegalmoves(currentbitboard,-1);

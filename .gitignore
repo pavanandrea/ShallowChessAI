@@ -1,5 +1,5 @@
-dataset/*
-!dataset/training_dataset_490k.zip
-stockfish/
-webgui/
+train/dataset/*
+!train/dataset/training_dataset_490k.zip
+train/stockfish/
 TODO.txt
+shallowchessai.cpp

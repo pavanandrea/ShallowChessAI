@@ -6,12 +6,11 @@
     License: MIT
     Date: 03/12/2023
 ======================================================================#
-include("./dev/08b_bitboard_from_fen_v2.jl");
-include("./dev/09_minimax_search.jl");
+include("../dev/08b_bitboard_from_fen_v2.jl");
+include("../dev/09_minimax_search.jl");
 
 
-#import 24k model
-#myneuralnet = JLD2.load(joinpath(@__DIR__,"../models/myneuralnet_24k.jld2"),"myneuralnet");
+#import 24k model from a custom BIN format (easier to parse than JLD2)
 W1 = Matrix{Float32}(undef,30,783);
 b1 = Vector{Float32}(undef,30);
 W2 = Matrix{Float32}(undef,30,30);
@@ -28,13 +27,15 @@ function import24kmodel(binfile)
     global W3 = reshape(arrayin[24460:24489],1,30);
     global b3 = [arrayin[24490]];
 end
-import24kmodel(joinpath(@__DIR__,"../models/myneuralnet_24k.bin"));
+import24kmodel(joinpath(@__DIR__,"../webgui/pretrained-2311-24k.bin"));
 function myneuralnet(xin)
     a2 = tanh.(W1*xin.+b1);
     a3 = tanh.(W2*a2.+b2);
     return tanh.(W3*a3.+b3);
 end
 
+#ALTERNATIVE: import 24k model from Flux JLD2
+#myneuralnet = JLD2.load(joinpath(@__DIR__,"train","pretrained-2311-24k.jld2"), "myneuralnet");
 
 #batch-supporting score function
 function batchscore(bitboards)

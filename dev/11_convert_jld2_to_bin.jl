@@ -20,7 +20,7 @@ using JLD2;
 
 
 #import JLD2 model
-filein = joinpath(@__DIR__,"../models/myneuralnet_24k.jld2");
+filein = joinpath(@__DIR__,"../train/pretrained-2311-24k.jld2");
 myneuralnet = JLD2.load(filein,"myneuralnet");
 display(myneuralnet);
 #weights are accessible using: myneuralnet.layers[1].weight (type: Matrix{Float32})

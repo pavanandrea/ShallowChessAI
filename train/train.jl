@@ -12,7 +12,7 @@
 ======================================================================#
 using Flux;
 using JLD2;
-#using Plots;       #optional
+using Plots;       #optional
 
 
 #parse command line arguments
@@ -20,9 +20,9 @@ pgndatabase = "";                                   #full path to the large PGN 
 stockfishexecutable = joinpath(@__DIR__,"./stockfish/stockfish-ubuntu-x86-64-avx2");    #full path to Stockfish engine (for dataset generation only - not required for training)
 Nsamplestarget = 500_000;                                                               #desired total number of samples in the dataset (for dataset generation only - not required for training)
 samplesaugmentingfactor = 0.8;                                                          #percentage of augmented boards in the dataset (for dataset generation only - not required for training)
-datasetfile = joinpath(@__DIR__,"./dataset/training_dataset_483k.csv");                 #full path to the dataset CSV file (required for training)
+datasetfile = joinpath(@__DIR__,"./dataset/training_dataset_490k.csv");                 #full path to the dataset CSV file (required for training)
 resumefile = "";                                    #full path to a JLD2 checkpoint if resuming training (optional for training)
-batchsize = 256;                                    #training batch size (required for training)
+batchsize = 16;                                    #training batch size (required for training)
 epochs = 300;                                       #number of training epochs (required for training)
 println("ShallowChessAI - Training script","\n");
 for (i,arg) in enumerate(ARGS)
@@ -76,14 +76,14 @@ if pgndatabase != "" && isfile(pgndatabase)
     end
     
     #convert PGN database to CSV dataset
-    include("dev/10_extract_dataset_from_pgn.jl");
+    include("../dev/10_extract_dataset_from_pgn.jl");
     Nextractedsamples = round(Int,Nsamplestarget*(1-samplesaugmentingfactor));      #number of boards to extract from PGN database
     #println("Extracting ",Nextractedsamples," boards");
     extractpgn(pgndatabase,datasetfile,stockfishexecutable,Nextractedsamples);
     println("\n");
 
     #expand CSV dataset by playing random moves
-    include("dev/10b_expand_dataset.jl");
+    include("../dev/10b_expand_dataset.jl");
     for i in 1:round(Nsamplestarget/Nextractedsamples)-1
         println("Augmentation round ",floor(Int,i),"/",floor(Int,round(Nsamplestarget/Nextractedsamples)-1));
         expandcsvdataset(datasetfile,stockfishexecutable,Nextractedsamples);
@@ -121,7 +121,7 @@ println("  ",N-Ntrain-Nvalidation," are dropped");
 
 
 #import data
-include("dev/08b_bitboard_from_fen_v2.jl");
+include("../dev/08b_bitboard_from_fen_v2.jl");
 xtrain = zeros(Float32,(783,Ntrain));
 xvalidation = zeros(Float32,(783,Nvalidation));
 ytrain = zeros(Float32,(1,Ntrain));
@@ -213,18 +213,18 @@ optimizer = Flux.setup(Adam(), myneuralnet);                                #Ada
     ynnval = myneuralnet(xvalidation);
     validationloss[epoch] = lossfun(ynnval,yvalidation);
     validationaccuracy[epoch] = length(findall(abs.(1500*ynnval.^3-1500*yvalidation.^3).<=100))/Nvalidation;
-    if epoch%10 == 0
+    if epoch%1 == 0
         println("  epoch ",epoch," - training loss = ",rpad(round(trainingloss[epoch],digits=6),8,'0')," - validation accuracy = ",rpad(round(100*validationaccuracy[epoch],digits=2),5,'0'),"%");
     end
 
     #save current model if it outperforms the best model so far
     if epoch>10 && validationloss[epoch]<=minimum(validationloss[1:epoch-1])
-        jldsave("models/myneuralnet_training_checkpoint.jld2"; myneuralnet);
+        jldsave(joinpath(@__DIR__,"myneuralnet_training_checkpoint.jld2"); myneuralnet);
     end
 end
 println("Training completed");
 
-#=
+
 #training convergence plot
 plt2 = plot(1:epochs, trainingloss, color=:blue, linewidth=3, label="Training loss",
     title="Training & validation loss",
@@ -234,12 +234,12 @@ plt2 = plot(1:epochs, trainingloss, color=:blue, linewidth=3, label="Training lo
 );
 plot!(plt2, 1:epochs, validationloss, color=:orange, linewidth=3, label="Validation loss");
 display(plt2);
-=#
+
 
 
 #save model
-#jldsave("models/myneuralnet.jld2"; myneuralnet);
-mv("models/myneuralnet_training_checkpoint.jld2","models/myneuralnet.jld2");
+#jldsave(joinpath(@__DIR__,"pretrained.jld2"); myneuralnet);
+mv(joinpath(@__DIR__,"myneuralnet_training_checkpoint.jld2"),joinpath(@__DIR__,"pretrained.jld2"));
 println("Model saved to file");
 
 

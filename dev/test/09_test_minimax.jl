@@ -8,12 +8,12 @@
 ======================================================================#
 using Flux;
 using JLD2;
-include("../dev/08b_bitboard_from_fen_v2.jl");
-include("../dev/09_minimax_search.jl");
+include("../08b_bitboard_from_fen_v2.jl");
+include("../09_minimax_search.jl");
 
 
 #initialize neural network and board position
-myneuralnet = JLD2.load(joinpath(@__DIR__,"../models/myneuralnet_24k.jld2"),"myneuralnet");
+myneuralnet = JLD2.load(joinpath(@__DIR__,"../../train/pretrained-2311-24k.jld2"),"myneuralnet");
 gameboard = bitboardfromfen("3k4/8/8/8/8/8/3q1PPP/6K1 b - - 0 1");
 
 

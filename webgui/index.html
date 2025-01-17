@@ -1,0 +1,124 @@
+<!--
+    Web GUI demo to play with ShallowChessAI online
+
+    Author: Andrea Pavan
+    License: MIT
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Play with ShallowChessAI</title>
+</head>
+<body>
+    <header id="header">
+        ShallowChessAI
+        &ensp;
+        <input type="submit" value="Start New Game" id="restartButton" />
+    </header>
+    <div id="content">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="margin-left: 0;">
+                Model:
+                &ensp;
+                <select id="modelSelector">
+                    <option value="random_move" selected>random</option>
+                    <option value="pretrained_2311_24k">pretrained-2311-24k</option>
+                </select>
+            </div>
+            <div style="margin-right: 0;">
+                Depth:
+                &ensp;
+                <select id="depthSelector" disabled>
+                    <option value="0" selected>0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div id="gameboard">
+            <div class="square square-white" id="square0"></div>
+            <div class="square square-black" id="square1"></div>
+            <div class="square square-white" id="square2"></div>
+            <div class="square square-black" id="square3"></div>
+            <div class="square square-white" id="square4"></div>
+            <div class="square square-black" id="square5"></div>
+            <div class="square square-white" id="square6"></div>
+            <div class="square square-black" id="square7"></div>
+
+            <div class="square square-black" id="square8"></div>
+            <div class="square square-white" id="square9"></div>
+            <div class="square square-black" id="square10"></div>
+            <div class="square square-white" id="square11"></div>
+            <div class="square square-black" id="square12"></div>
+            <div class="square square-white" id="square13"></div>
+            <div class="square square-black" id="square14"></div>
+            <div class="square square-white" id="square15"></div>
+
+            <div class="square square-white" id="square16"></div>
+            <div class="square square-black" id="square17"></div>
+            <div class="square square-white" id="square18"></div>
+            <div class="square square-black" id="square19"></div>
+            <div class="square square-white" id="square20"></div>
+            <div class="square square-black" id="square21"></div>
+            <div class="square square-white" id="square22"></div>
+            <div class="square square-black" id="square23"></div>
+
+            <div class="square square-black" id="square24"></div>
+            <div class="square square-white" id="square25"></div>
+            <div class="square square-black" id="square26"></div>
+            <div class="square square-white" id="square27"></div>
+            <div class="square square-black" id="square28"></div>
+            <div class="square square-white" id="square29"></div>
+            <div class="square square-black" id="square30"></div>
+            <div class="square square-white" id="square31"></div>
+
+            <div class="square square-white" id="square32"></div>
+            <div class="square square-black" id="square33"></div>
+            <div class="square square-white" id="square34"></div>
+            <div class="square square-black" id="square35"></div>
+            <div class="square square-white" id="square36"></div>
+            <div class="square square-black" id="square37"></div>
+            <div class="square square-white" id="square38"></div>
+            <div class="square square-black" id="square39"></div>
+
+            <div class="square square-black" id="square40"></div>
+            <div class="square square-white" id="square41"></div>
+            <div class="square square-black" id="square42"></div>
+            <div class="square square-white" id="square43"></div>
+            <div class="square square-black" id="square44"></div>
+            <div class="square square-white" id="square45"></div>
+            <div class="square square-black" id="square46"></div>
+            <div class="square square-white" id="square47"></div>
+
+            <div class="square square-white" id="square48"></div>
+            <div class="square square-black" id="square49"></div>
+            <div class="square square-white" id="square50"></div>
+            <div class="square square-black" id="square51"></div>
+            <div class="square square-white" id="square52"></div>
+            <div class="square square-black" id="square53"></div>
+            <div class="square square-white" id="square54"></div>
+            <div class="square square-black" id="square55"></div>
+
+            <div class="square square-black" id="square56"></div>
+            <div class="square square-white" id="square57"></div>
+            <div class="square square-black" id="square58"></div>
+            <div class="square square-white" id="square59"></div>
+            <div class="square square-black" id="square60"></div>
+            <div class="square square-white" id="square61"></div>
+            <div class="square square-black" id="square62"></div>
+            <div class="square square-white" id="square63"></div>
+        </div>
+        <label id="castlingLabel"></label>
+    </div>
+<script type="text/javascript" src="shallowchessai-web.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

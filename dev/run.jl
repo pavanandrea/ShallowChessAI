@@ -8,12 +8,12 @@
 ======================================================================#
 using Flux;
 using JLD2;
-include("./dev/08b_bitboard_from_fen_v2.jl");
-include("./dev/09_minimax_search.jl");
+include("../dev/08b_bitboard_from_fen_v2.jl");
+include("../dev/09_minimax_search.jl");
 
 
 #initialization
-myneuralnet = JLD2.load(joinpath(@__DIR__,"./models/myneuralnet_24k.jld2"),"myneuralnet");
+myneuralnet = JLD2.load(joinpath(@__DIR__,"../train/pretrained-2311-24k.jld2"),"myneuralnet");
 #pieces = ['P','N','B','R','Q','K','p','n','b','r','q','k'];
 pieces = ['♙','♘','♗','♖','♕','♔','🨾','♞','♝','♜','♛','♚'];
 squares = ["a8","b8","c8","d8","e8","f8","g8","h8",
@@ -78,7 +78,7 @@ end
 function main()
     println("ShallowChessAI - Chess game on command line\n");
     gameboard = bitboardfromfen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-    maxdepth = 4;
+    maxdepth = 2;
 
     #choose the starting player
     print("Choose the starting player (1=you, -1=computer): ");

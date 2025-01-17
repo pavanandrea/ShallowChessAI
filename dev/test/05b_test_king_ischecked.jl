@@ -6,7 +6,7 @@
     License: MIT
     Date: 07/10/2023
 ======================================================================#
-include("../dev/08b_bitboard_from_fen_v2.jl");
+include("../08b_bitboard_from_fen_v2.jl");
 
 
 println("Testing the function ischecked:");

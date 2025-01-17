@@ -6,8 +6,8 @@
     License: MIT
     Date: 25/10/2023
 ======================================================================#
-include("../dev/07b_move_generation_legal_v2.jl");
-include("../dev/08b_bitboard_from_fen_v2.jl");
+include("../07b_move_generation_legal_v2.jl");
+include("../08b_bitboard_from_fen_v2.jl");
 
 
 println("Testing the legal move generation (debugging tests):");

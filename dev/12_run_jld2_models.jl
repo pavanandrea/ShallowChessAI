@@ -13,7 +13,7 @@ include("./09_minimax_search.jl");
 
 
 #initialization
-myneuralnet = JLD2.load(joinpath(@__DIR__,"../models/myneuralnet_24k.jld2"),"myneuralnet");
+myneuralnet = JLD2.load(joinpath(@__DIR__,"../train/pretrained-2311-24k.jld2"),"myneuralnet");
 #pieces = ['P','N','B','R','Q','K','p','n','b','r','q','k'];
 pieces = ['♙','♘','♗','♖','♕','♔','🨾','♞','♝','♜','♛','♚'];
 squares = ["a8","b8","c8","d8","e8","f8","g8","h8",

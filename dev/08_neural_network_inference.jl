@@ -13,7 +13,7 @@ include("08b_bitboard_from_fen_v1.jl");
 
 
 gameboard = bitboardfromfen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-myneuralnet = JLD2.load(joinpath(@__DIR__,"../train/results/myneuralnet_24k.jld2"),"myneuralnet");
+myneuralnet = JLD2.load(joinpath(@__DIR__,"../train/pretrained-2311-24k.jld2"),"myneuralnet");
 (availablemoves,childboards) = legalmoves(gameboard,1);
 println("Found ",length(availablemoves)," legal moves:");
 ynn = myneuralnet(childboards);
