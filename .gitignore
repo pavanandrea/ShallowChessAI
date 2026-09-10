@@ -9,7 +9,7 @@ train/dataset/*
 !train/dataset/*.py
 !train/dataset/*.md
 !train/dataset/*.png
-train/test/*
+train/test/*.*
 !train/test/*.py
 !train/test/*.md
 !train/test/*.png

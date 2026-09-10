@@ -72,10 +72,23 @@ python3 02_evaluate_onnx.py \
 
 For each position, the error is computed by comparing the model's output against the Stockfish reference scores.
 
+
+### shallowchessai-v2311-24k
+
+For non-mate positions, the Mean Absolute Error (MAE) is **182.6 cp**.
+
+![Centipawn error distribution plot](./v2311/cp_error_distribution_v2311.png)
+
+The error distribution is quite fat, indicating that absolute performance is poor and the model makes a lot of mistakes.
+Only 23.2% of non-mate positions have an error less than 50cp, 10.0% less than 20cp and 5.0%* less than 10cp.
+
+
+### shallowchessai-v2609-43k
+
 For non-mate positions, the Mean Absolute Error (MAE) is **120.7 cp**.
 This value is consistent with the results observed on the validation set (119.7 cp), indicating that the neural network is generalizing well to unseen data.
 
-![Centipawn error distribution plot](./cp_error_distribution.png)
+![Centipawn error distribution plot](./cp_error_distribution_v2609.png)
 
 The error distribution reveals that the model achieves high precision on a significant portion of the dataset, despite its extremely small size: **40.4%** of non-mate positions have an error less than 50cp, **17.4%** less than 20cp and **8.7%** less than 10cp.
 These figures suggest that the network is effectively learning from data.
@@ -84,3 +97,13 @@ However, the distribution exhibits a very long tail, indicating that absolute pe
 This is expected given the tiny size of the neural network.
 
 Performance on mate positions is similarly limited, with a high MAE of approximately 1.32 score units.
+
+
+### Comparison
+
+| Results                     | shallowchessai-v2609-43k   | shallowchessai-v2311-24k |
+| :-------------------------- | :------------------------- | :----------------------- |
+| MAE (non-mate)              | **120.7 cp**               | 182.6 cp                 |
+| Positions with error < 50cp | **40.4%**                  | 23.2%                    |
+| Positions with error < 20cp | **17.4%**                  | 10.0%                    |
+| Positions with error < 10cp | **8.7%**                   | 5.0%                     |

@@ -210,12 +210,12 @@ Full details, including the testing pipeline and distribution plots, can be foun
 
 The results are summarized in the table below:
 
-| Non-mate        | Result   |
-| :-------------- | :------- |
-| MAE             | 120.7 cp |
-| Fraction < 50cp | 40.4%    |
-| Fraction < 20cp | 17.4%    |
-| Fraction < 10cp | 8.7%     |
+| Results                     | Model v2609  |
+| :-------------------------- | :----------- |
+| MAE (non-mate)              | 120.7 cp     |
+| Positions with error < 50cp | 40.4%        |
+| Positions with error < 20cp | 17.4%        |
+| Positions with error < 10cp | 8.7%         |
 
 The consistency between the test MAE and the validation results confirms the model's ability to generalize to unseen data.
 However, a MAE of 120.7 cp indicates that absolute performance remains poor.

@@ -2,7 +2,7 @@
 
 ### Update 2026/09/10
 
-Enhacements:
+Enhancements:
 * Replaced int array data structure with an actual bitboard.
 * Refactored data structure for moves.
 * Perft performance improved to ∼16.8M NPS (for reference, Stockfish on the same machine achieves ∼124.1M NPS).
@@ -12,11 +12,12 @@ Enhacements:
 * New dataset of 38.9M unique positions.
 * New MLP model (v2609) with 43k parameters.
 * Replaced inference code with ONNX Runtime Web.
+* Comparison between v2609 and v2311.
 
 
 ### Update 2025/01/16
 
-Enhacements:
+Enhancements:
 
 * Refactored the whole algorithm from Julia to C.
 * Made a Web GUI and an online demo using WebAssembly.
