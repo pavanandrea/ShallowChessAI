@@ -2,18 +2,19 @@
 //  Testing program for the ischecked() function
 //
 //  How to run:
-//  g++ -Wall -Wextra 01_test_ischecked.c -o 01_test_ischecked && ./01_test_ischecked
+//  gcc 01_test_ischecked.c -o 01_test_ischecked -std=c17 -Wall -Wextra
+//  ./01_test_ischecked
 //
 //  Author: Andrea Pavan
 //  License: MIT
 //---------------------------------------------------------------------
 #include <stdio.h>
-#include "../chess.c"
+#include "../src/chess.c"
 
 
 int main() {
     printf("Testing program for the ischecked() function\n");
-    int gameboard[783] = {0};
+    BitBoard gameboard;
 
     //test #1: starting position
     //https://lichess.org/editor/

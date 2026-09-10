@@ -1,16 +1,15 @@
-<!--
+<!------------------------------------------------------------------------------
     Web GUI demo to play with ShallowChessAI online
 
     Author: Andrea Pavan
     License: MIT
--->
-
-
+------------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png" />
     <link rel="stylesheet" href="style.css">
     <title>Play with ShallowChessAI</title>
 </head>
@@ -25,21 +24,20 @@
             <div style="margin-left: 0;">
                 Model:
                 &ensp;
-                <select id="modelSelector">
-                    <option value="random_move" selected>random</option>
-                    <option value="pretrained_2311_24k">pretrained-2311-24k</option>
-                </select>
+            <select id="modelSelector">
+                <option value="shallowchessai_v2609_43k" selected>shallowchessai-v2609-43k</option>
+                <option value="minimax_material">minimax-material</option>
+                <option value="random_move">random</option>
+            </select>
             </div>
             <div style="margin-right: 0;">
                 Depth:
                 &ensp;
-                <select id="depthSelector" disabled>
-                    <option value="0" selected>0</option>
+                <select id="depthSelector">
                     <option value="1">1</option>
-                    <option value="2">2</option>
+                    <option value="2" selected>2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
-                    <option value="5">5</option>
                 </select>
             </div>
         </div>
@@ -118,7 +116,7 @@
         </div>
         <label id="castlingLabel"></label>
     </div>
-<script type="text/javascript" src="shallowchessai-web.js"></script>
-<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="./wasm/chess-web.js"></script>
+<script type="module" src="main.js"></script>
 </body>
 </html>

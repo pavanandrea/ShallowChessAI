@@ -1,5 +1,19 @@
 # ShallowChessAI Development Changelog
 
+### Update 2026/09/10
+
+Enhacements:
+* Replaced int array data structure with an actual bitboard.
+* Refactored data structure for moves.
+* Perft performance improved to ∼16.8M NPS (for reference, Stockfish on the same machine achieves ∼124.1M NPS).
+* Added new positions to the perft test.
+* Improved documentation and reproducibility.
+* New dataset generation & training pipeline in Python & PyTorch.
+* New dataset of 38.9M unique positions.
+* New MLP model (v2609) with 43k parameters.
+* Replaced inference code with ONNX Runtime Web.
+
+
 ### Update 2025/01/16
 
 Enhacements:
@@ -22,6 +36,7 @@ Enhancements:
 Bug fixes:
 
 * Fixed promotion while capturing bug in the pseudolegal move generator.
+
 
 ### Update 2023/11/26
 
