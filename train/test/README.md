@@ -50,7 +50,7 @@ python3 ../dataset/05_plot_cp_distribution.py \
 
 ![Centipawn distribution plot](./test_set_fen_1302_cp_distribution.png)
 
-Overall, the shape of the distribution seems to closely mirror the one in the training dataset.
+Overall, the shape of the distribution seems to closely mirror the one in the [training dataset](../dataset/README.md).
 
 The mean value is basically the same (+16 cp vs +15 cp of the training set).
 Roughly 30% of non-mate positions fall within ±100 cp, a slightly higher fraction than the 28% observed in the training set.

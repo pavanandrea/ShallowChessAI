@@ -67,7 +67,7 @@ For this project, a custom formula is derived from scratch to satisfy the follow
 
 For non-mate positions, a hyperbolic tangent function is used:
 
-$$\text{score} = 2 \, \tanh \! \left( \frac{\text{cp}}{364} \right)$$
+$$\text{score} = 2 \tanh \left( \frac{\text{cp}}{364} \right)$$
 
 The input cp is clipped to $\left[ -1500, +1500 \right]$.
 The constant $364$ is chosen specifically to map the range of $\left[ -200, +200 \right]$ cp to the $\left[-1, +1 \right]$ interval.
@@ -75,7 +75,7 @@ This ensures a high gradient near zero ($\approx 0.0055$ score per cp) increasin
 
 Mate positions are handled separately to preserve strict ordering. For a mate in N plies:
 
-$$\text{score} = \pm \! \left( 2 + \frac{1}{N ^ {2/3}} \right)$$
+$$\text{score} = \pm \left( 2 + \frac{1}{N ^ {2/3}} \right)$$
 
 By placing these values above $\pm 2$, the model can distinguish between "slightly winning" and "forced mate", as well as different mates.
 
